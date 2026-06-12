@@ -97,6 +97,11 @@ class PublicController extends Controller
         return back()->with('success', 'Bukti pembayaran berhasil diunggah. Menunggu konfirmasi admin.');
     }
 
+    public function tentang()
+    {
+        return view('public.tentang');
+    }
+
     public function downloadEbook(Ebook $ebook)
     {
         abort_unless(auth()->user()->hasAccess('ebook', $ebook->id), 403);

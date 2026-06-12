@@ -18,6 +18,7 @@
                 <a href="/ebook" class="hover:text-blue-700">Ebook</a>
                 <a href="/kelas" class="hover:text-blue-700">Kelas</a>
                 <a href="/blog" class="hover:text-blue-700">Blog</a>
+                <a href="/tentang" class="hover:text-blue-700">Tentang</a>
             </div>
 
             <div class="flex items-center gap-3 text-sm">

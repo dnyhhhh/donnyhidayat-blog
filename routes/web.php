@@ -12,6 +12,7 @@ Route::get('/ebook', [PublicController::class, 'ebookIndex']);
 Route::get('/ebook/{slug}', [PublicController::class, 'ebookShow']);
 Route::get('/kelas', [PublicController::class, 'courseIndex']);
 Route::get('/kelas/{slug}', [PublicController::class, 'courseShow']);
+Route::get('/tentang', [PublicController::class, 'tentang']);
 Route::get('/blog', [PublicController::class, 'blogIndex']);
 Route::get('/blog/{slug}', [PublicController::class, 'blogShow']);
 
