@@ -17,11 +17,36 @@
             {{-- Desktop menu --}}
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
                 <a href="/" class="hover:text-blue-700">Home</a>
-                <a href="/ebook" class="hover:text-blue-700">Ebook</a>
-                <a href="/kelas" class="hover:text-blue-700">Kelas</a>
-                <a href="/materi" class="hover:text-blue-700">Materi Interaktif</a>
-                <a href="/template" class="hover:text-blue-700">Template</a>
-                <a href="/bundling" style="background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;padding:5px 14px;border-radius:20px;font-weight:700;font-size:13px;">🔥 Bundling</a>
+
+                {{-- Dropdown Produk --}}
+                <div class="relative" x-data="{ produk: false }" @mouseenter="produk=true" @mouseleave="produk=false">
+                    <button @click="produk=!produk"
+                            class="flex items-center gap-1 hover:text-blue-700 focus:outline-none"
+                            :class="produk ? 'text-blue-700' : ''">
+                        Produk
+                        <svg :class="produk ? 'rotate-180' : ''" style="width:14px;height:14px;transition:transform .2s;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div x-show="produk" x-transition
+                         style="display:none;position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.1);padding:8px;z-index:100;">
+                        <a href="/ebook" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-blue-700">
+                            <span style="font-size:18px;">📘</span> Ebook
+                        </a>
+                        <a href="/kelas" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-blue-700">
+                            <span style="font-size:18px;">🎓</span> Kelas Online
+                        </a>
+                        <a href="/materi" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-blue-700">
+                            <span style="font-size:18px;">✏️</span> Materi Interaktif
+                        </a>
+                        <a href="/template" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-gray-50 text-gray-700 hover:text-blue-700">
+                            <span style="font-size:18px;">🖥️</span> Template Website
+                        </a>
+                        <div style="border-top:1px solid #f3f4f6;margin:6px 0;"></div>
+                        <a href="/bundling" class="flex items-center gap-3 px-4 py-2.5 rounded-lg hover:bg-orange-50" style="color:#d97706;font-weight:700;">
+                            <span style="font-size:18px;">🔥</span> Paket Bundling
+                        </a>
+                    </div>
+                </div>
+
                 <a href="/blog" class="hover:text-blue-700">Blog</a>
                 <a href="/tentang" class="hover:text-blue-700">Tentang</a>
             </div>
@@ -51,11 +76,22 @@
         {{-- Mobile menu --}}
         <div x-show="open" x-transition style="display:none;" class="md:hidden border-t border-gray-100 bg-white px-4 pb-5 pt-3 space-y-1">
             <a href="/" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Home</a>
-            <a href="/ebook" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Ebook</a>
-            <a href="/kelas" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Kelas</a>
-            <a href="/materi" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Materi Interaktif</a>
-            <a href="/template" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Template</a>
-            <a href="/bundling" class="block py-2.5 text-sm font-bold" style="color:#d97706;">🔥 Paket Bundling</a>
+
+            {{-- Accordion Produk (mobile) --}}
+            <div x-data="{ produk: false }">
+                <button @click="produk=!produk" class="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700">
+                    <span>Produk</span>
+                    <svg :class="produk ? 'rotate-180' : ''" style="width:14px;height:14px;transition:transform .2s;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div x-show="produk" style="display:none;padding-left:12px;border-left:2px solid #e5e7eb;margin-left:4px;" class="space-y-1">
+                    <a href="/ebook" class="flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-blue-700">📘 Ebook</a>
+                    <a href="/kelas" class="flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-blue-700">🎓 Kelas Online</a>
+                    <a href="/materi" class="flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-blue-700">✏️ Materi Interaktif</a>
+                    <a href="/template" class="flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-blue-700">🖥️ Template Website</a>
+                    <a href="/bundling" class="flex items-center gap-2 py-2 text-sm font-bold" style="color:#d97706;">🔥 Paket Bundling</a>
+                </div>
+            </div>
+
             <a href="/blog" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Blog</a>
             <a href="/tentang" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Tentang</a>
 
