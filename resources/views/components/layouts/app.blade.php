@@ -19,6 +19,7 @@
                 <a href="/ebook" class="hover:text-blue-700">Ebook</a>
                 <a href="/kelas" class="hover:text-blue-700">Kelas</a>
                 <a href="/materi" class="hover:text-blue-700">Materi Interaktif</a>
+                <a href="/template" class="hover:text-blue-700">Template</a>
                 <a href="/bundling" style="background:linear-gradient(90deg,#f59e0b,#ef4444);color:#fff;padding:5px 14px;border-radius:20px;font-weight:700;font-size:13px;">🔥 Bundling</a>
                 <a href="/blog" class="hover:text-blue-700">Blog</a>
                 <a href="/tentang" class="hover:text-blue-700">Tentang</a>
@@ -51,6 +52,7 @@
             <a href="/ebook" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Ebook</a>
             <a href="/kelas" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Kelas</a>
             <a href="/materi" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Materi Interaktif</a>
+            <a href="/template" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Template</a>
             <a href="/bundling" class="block py-2.5 text-sm font-bold" style="color:#d97706;">🔥 Paket Bundling</a>
             <a href="/blog" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Blog</a>
             <a href="/tentang" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Tentang</a>
