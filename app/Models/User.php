@@ -27,8 +27,18 @@ class User extends Authenticatable
 
     public function orders() { return $this->hasMany(Order::class); }
 
+    public function hasBundle(): bool
+    {
+        return $this->orders()
+            ->where('orderable_type', 'bundle')
+            ->where('status', 'paid')
+            ->exists();
+    }
+
     public function hasAccess(string $type, int $id): bool
     {
+        if ($this->hasBundle()) return true;
+
         return $this->orders()
             ->where('orderable_type', $type)
             ->where('orderable_id', $id)

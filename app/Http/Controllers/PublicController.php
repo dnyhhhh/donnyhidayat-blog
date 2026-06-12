@@ -61,9 +61,24 @@ class PublicController extends Controller
     public function checkout(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:ebook,course,materi',
+            'type' => 'required|in:ebook,course,materi,bundle',
             'id'   => 'required|integer',
         ]);
+
+        if ($request->type === 'bundle') {
+            if (auth()->user()->hasBundle()) {
+                return back()->with('info', 'Anda sudah memiliki Paket Bundling.');
+            }
+            $order = Order::create([
+                'user_id'        => auth()->id(),
+                'invoice_number' => 'INV-' . strtoupper(uniqid()),
+                'orderable_type' => 'bundle',
+                'orderable_id'   => 1,
+                'amount'         => 297000,
+                'status'         => 'pending',
+            ]);
+            return redirect("/member/order/{$order->id}");
+        }
 
         $model = match($request->type) {
             'ebook'  => Ebook::findOrFail($request->id),
@@ -97,6 +112,14 @@ class PublicController extends Controller
         $order->update(['payment_proof' => $path]);
 
         return back()->with('success', 'Bukti pembayaran berhasil diunggah. Menunggu konfirmasi admin.');
+    }
+
+    public function bundling()
+    {
+        $owned = auth()->check() && auth()->user()->hasBundle();
+        $ebookCount  = \App\Models\Ebook::where('is_published', true)->count();
+        $courseCount = \App\Models\Course::where('is_published', true)->count();
+        return view('public.bundling', compact('owned', 'ebookCount', 'courseCount'));
     }
 
     public function materiIndex()

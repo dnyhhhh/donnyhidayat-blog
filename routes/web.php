@@ -12,6 +12,7 @@ Route::get('/ebook', [PublicController::class, 'ebookIndex']);
 Route::get('/ebook/{slug}', [PublicController::class, 'ebookShow']);
 Route::get('/kelas', [PublicController::class, 'courseIndex']);
 Route::get('/kelas/{slug}', [PublicController::class, 'courseShow']);
+Route::get('/bundling', [PublicController::class, 'bundling']);
 Route::get('/materi', [PublicController::class, 'materiIndex']);
 Route::get('/materi/modul/{modul}', [PublicController::class, 'materiModul'])->middleware('auth');
 Route::get('/materi/{slug}', [PublicController::class, 'materiDetail'])->where('slug', '[a-z0-9\-]+');
