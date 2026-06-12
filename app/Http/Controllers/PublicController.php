@@ -16,9 +16,10 @@ class PublicController extends Controller
     public function home()
     {
         return view('public.home', [
-            'ebooks'  => Ebook::where('is_published', true)->latest()->take(3)->get(),
-            'courses' => Course::where('is_published', true)->latest()->take(3)->get(),
-            'posts'   => Post::where('is_published', true)->latest()->take(3)->get(),
+            'ebooks'    => Ebook::where('is_published', true)->latest()->take(3)->get(),
+            'courses'   => Course::where('is_published', true)->latest()->take(3)->get(),
+            'templates' => \App\Models\Template::where('is_published', true)->latest()->take(3)->get(),
+            'posts'     => Post::where('is_published', true)->latest()->take(3)->get(),
         ]);
     }
 

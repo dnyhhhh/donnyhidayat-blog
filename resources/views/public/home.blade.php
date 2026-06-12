@@ -101,6 +101,46 @@
         </div>
     </section>
 
+    {{-- Template Website --}}
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-2xl font-bold">Template Website</h2>
+                    <p class="text-gray-500 text-sm mt-1">Source code siap pakai, tinggal pasang.</p>
+                </div>
+                <a href="/template" class="text-blue-700 text-sm hover:underline">Lihat semua →</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                @forelse($templates as $template)
+                <div class="rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col">
+                    @if($template->cover_image)
+                        <img src="{{ asset('storage/'.$template->cover_image) }}" class="w-full h-48 object-cover">
+                    @else
+                        <div class="w-full h-48 flex items-center justify-center text-4xl" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);">🖥️</div>
+                    @endif
+                    <div class="p-5 flex flex-col flex-1 bg-white">
+                        @if($template->tech_stack)
+                        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px;">
+                            @foreach(explode(',', $template->tech_stack) as $tech)
+                                <span style="background:#f0f9ff;color:#0369a1;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;">{{ trim($tech) }}</span>
+                            @endforeach
+                        </div>
+                        @endif
+                        <h3 class="font-semibold text-gray-800">{{ $template->title }}</h3>
+                        <div class="flex items-center justify-between mt-3">
+                            <p class="text-blue-700 font-bold">Rp {{ number_format($template->price, 0, ',', '.') }}</p>
+                            <a href="/template/{{ $template->slug }}" style="font-size:12px;color:#1d4ed8;font-weight:600;">Detail →</a>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                    <p class="text-gray-400 col-span-3">Belum ada template.</p>
+                @endforelse
+            </div>
+        </div>
+    </section>
+
     {{-- Artikel Terbaru --}}
     <section class="max-w-6xl mx-auto px-4 py-16">
         <div class="flex items-center justify-between mb-8">
