@@ -14,40 +14,44 @@ class RisetController extends Controller
     public function generate(Request $request)
     {
         $request->validate([
-            'nama'         => 'required|string|max:100',
-            'universitas'  => 'required|string|max:150',
-            'fakultas'     => 'required|string|max:150',
-            'prodi'        => 'required|string|max:150',
-            'konsentrasi'  => 'nullable|string|max:150',
-            'semester'     => 'required|integer|min:1|max:14',
-            'metode'       => 'required|in:Kuantitatif,Kualitatif,Mixed Methods',
-            'minat'        => 'nullable|string|max:300',
+            'prodi'       => 'required|string|max:150',
+            'konsentrasi' => 'nullable|string|max:150',
+            'semester'    => 'required|in:5,7,10',
+            'bidang'      => 'required|array|min:1',
+            'bidang.*'    => 'string|max:100',
+            'metode'      => 'required|in:Kuantitatif,Kualitatif,Mixed Methods,Belum tahu',
+            'akses'       => 'required|in:perusahaan,kuesioner,sekunder,belum',
         ]);
 
-        $profile = $request->only(['nama', 'universitas', 'fakultas', 'prodi', 'konsentrasi', 'semester', 'metode', 'minat']);
+        $profile = [
+            'prodi'       => $request->prodi,
+            'konsentrasi' => $request->konsentrasi,
+            'semester'    => $request->semester,
+            'bidang'      => $request->bidang,
+            'metode'      => $request->metode,
+            'akses'       => $request->akses,
+        ];
 
         $ideas = RisetIdea::active()->get();
 
-        // Beri skor tiap ide berdasarkan kecocokan profil
         $scored = $ideas->map(function ($idea) use ($profile) {
             return ['idea' => $idea, 'score' => $idea->matchScore($profile)];
         })->sortByDesc('score')->take(8)->values();
 
-        // Tambah keyword minat sebagai bonus filter
-        if ($profile['minat']) {
-            $keywords = array_map('trim', explode(',', strtolower($profile['minat'])));
-            $scored = $scored->map(function ($item) use ($keywords) {
-                foreach ($keywords as $kw) {
-                    if ($kw && (
-                        str_contains(strtolower($item['idea']->judul), $kw) ||
-                        str_contains(strtolower($item['idea']->deskripsi), $kw)
-                    )) {
-                        $item['score'] += 2;
-                    }
+        // Bonus score dari kata kunci bidang minat
+        $keywords = array_map('strtolower', $profile['bidang']);
+        $scored = $scored->map(function ($item) use ($keywords) {
+            foreach ($keywords as $kw) {
+                if ($kw && (
+                    str_contains(strtolower($item['idea']->judul), $kw) ||
+                    str_contains(strtolower($item['idea']->deskripsi), $kw) ||
+                    str_contains(strtolower($item['idea']->konsentrasi ?? ''), $kw)
+                )) {
+                    $item['score'] += 2;
                 }
-                return $item;
-            })->sortByDesc('score')->values();
-        }
+            }
+            return $item;
+        })->sortByDesc('score')->values();
 
         $results = $scored->pluck('idea');
 
