@@ -27,4 +27,26 @@
     .line-through { text-decoration-line: line-through; }
     .text-gray-400 { color: #9ca3af; }
     .text-gray-500 { color: #6b7280; }
+
+    /* Safelist: Alpine :class dynamic bindings — riset wizard */
+    .border-blue-600 { border-color: #2563eb; }
+    .border-gray-300 { border-color: #d1d5db; }
+    .bg-blue-600 { background-color: #2563eb; }
+    .text-blue-700 { color: #1d4ed8; }
+    .text-gray-800 { color: #1f2937; }
+    .text-gray-700 { color: #374151; }
+    .cursor-not-allowed { cursor: not-allowed; }
+    .cursor-pointer { cursor: pointer; }
+    .from-blue-700 { --tw-gradient-from: #1d4ed8; }
+    .to-blue-500 { --tw-gradient-to: #3b82f6; }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to)); }
+
+    /* Safelist: riset-hasil hover & opacity */
+    .hover\:border-blue-200:hover { border-color: #bfdbfe; }
+    .hover\:shadow-md:hover { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+    .bg-white\/15 { background-color: rgb(255 255 255 / 0.15); }
+    .hover\:bg-white\/25:hover { background-color: rgb(255 255 255 / 0.25); }
+    .border-white\/30 { border-color: rgb(255 255 255 / 0.3); }
+    .bg-white\/10 { background-color: rgb(255 255 255 / 0.1); }
+    .hover\:bg-white\/20:hover { background-color: rgb(255 255 255 / 0.2); }
 }
