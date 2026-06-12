@@ -21,7 +21,8 @@ Route::get('/materi/modul/{modul}', [PublicController::class, 'materiModul'])->m
 Route::get('/materi/{slug}', [PublicController::class, 'materiDetail'])->where('slug', '[a-z0-9\-]+');
 Route::get('/tentang', [PublicController::class, 'tentang']);
 Route::get('/riset', [RisetController::class, 'index']);
-Route::post('/riset/generate', [RisetController::class, 'generate'])->middleware('auth');
+Route::post('/riset/generate', [RisetController::class, 'generate']);
+Route::get('/riset/resume', [RisetController::class, 'resume'])->middleware('auth');
 Route::get('/blog', [PublicController::class, 'blogIndex']);
 Route::get('/blog/{slug}', [PublicController::class, 'blogShow']);
 

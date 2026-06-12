@@ -23,22 +23,41 @@ class RisetController extends Controller
             'akses'       => 'required|in:perusahaan,kuesioner,sekunder,belum',
         ]);
 
-        $profile = [
-            'prodi'       => $request->prodi,
-            'konsentrasi' => $request->konsentrasi,
-            'semester'    => $request->semester,
-            'bidang'      => $request->bidang,
-            'metode'      => $request->metode,
-            'akses'       => $request->akses,
-        ];
+        if (!auth()->check()) {
+            session(['riset_pending' => $request->only(['prodi', 'konsentrasi', 'semester', 'bidang', 'metode', 'akses'])]);
+            return redirect()->guest('/login');
+        }
 
+        $profile = $request->only(['prodi', 'konsentrasi', 'semester', 'bidang', 'metode', 'akses']);
+
+        return view('public.riset-hasil', [
+            'results' => $this->findMatches($profile),
+            'profile' => $profile,
+        ]);
+    }
+
+    public function resume()
+    {
+        $profile = session()->pull('riset_pending');
+
+        if (!$profile) {
+            return redirect('/riset');
+        }
+
+        return view('public.riset-hasil', [
+            'results' => $this->findMatches($profile),
+            'profile' => $profile,
+        ]);
+    }
+
+    private function findMatches(array $profile)
+    {
         $ideas = RisetIdea::active()->get();
 
         $scored = $ideas->map(function ($idea) use ($profile) {
             return ['idea' => $idea, 'score' => $idea->matchScore($profile)];
         })->sortByDesc('score')->take(8)->values();
 
-        // Bonus score dari kata kunci bidang minat
         $keywords = array_map('strtolower', $profile['bidang']);
         $scored = $scored->map(function ($item) use ($keywords) {
             foreach ($keywords as $kw) {
@@ -53,8 +72,6 @@ class RisetController extends Controller
             return $item;
         })->sortByDesc('score')->values();
 
-        $results = $scored->pluck('idea');
-
-        return view('public.riset-hasil', compact('results', 'profile'));
+        return $scored->pluck('idea');
     }
 }
