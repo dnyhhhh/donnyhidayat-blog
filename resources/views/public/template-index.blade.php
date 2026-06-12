@@ -15,7 +15,7 @@
             @if($template->cover_image)
                 <img src="{{ asset('storage/'.$template->cover_image) }}" class="w-full h-48 object-cover">
             @else
-                <div style="width:100%;height:192px;background:linear-gradient(135deg,#dbeafe,#ede9fe);display:flex;align-items:center;justify-content:center;font-size:48px;">🖥️</div>
+                <div style="width:100%;height:192px;background:linear-gradient(135deg,#dbeafe,#ede9fe);display:flex;align-items:center;justify-content:center;color:#818cf8;"><svg style="width:48px;height:48px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div>
             @endif
 
             <div class="p-5 flex flex-col flex-1">
@@ -48,7 +48,7 @@
         </div>
         @empty
         <div class="col-span-3 text-center text-gray-400 py-20">
-            <p class="text-4xl mb-3">🖥️</p>
+            <p class="mb-3 flex justify-center" style="color:#818cf8;"><svg style="width:40px;height:40px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></p>
             <p>Belum ada template tersedia.</p>
         </div>
         @endforelse

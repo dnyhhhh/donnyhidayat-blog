@@ -140,7 +140,7 @@
 <section class="max-w-5xl mx-auto px-4 pb-10">
     <h2 class="text-xl font-bold text-gray-800 mb-6">Pendidikan</h2>
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 flex gap-5 items-start">
-        <div style="width:48px;height:48px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🎓</div>
+        <div style="width:48px;height:48px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#1d4ed8;"><svg style="width:22px;height:22px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></div>
         <div>
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
                 <h3 class="font-semibold text-gray-800">Sarjana Rekayasa Sistem Komputer</h3>
@@ -262,7 +262,7 @@
             </a>
             <a href="/ebook"
                class="bg-white/10 border border-white/30 text-white font-semibold px-6 py-3 rounded-xl hover:bg-white/20 transition text-sm">
-                📚 Lihat Ebook Saya
+                Lihat Ebook Saya
             </a>
         </div>
     </div>

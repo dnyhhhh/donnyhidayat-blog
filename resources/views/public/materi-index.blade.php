@@ -20,13 +20,23 @@
     <h2 style="font-size:1.3rem;font-weight:800;color:#111827;text-align:center;margin-bottom:32px;">Kenapa Materi Interaktif?</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
         @foreach([
-            ['✏️','Isi Langsung di Web','Tidak perlu kertas atau buku tulis. Semua latihan bisa dikerjakan langsung di browser kamu.'],
-            ['🔑','Kunci Jawaban Instan','Setelah selesai, cek jawabanmu dengan satu klik. Belajar mandiri jadi lebih efektif.'],
-            ['📊','Pantau Progress','Setiap modul punya progress tracker. Kamu tahu persis sudah sampai mana.'],
-            ['💾','Tersimpan Otomatis','Jawabanmu tidak akan hilang. Bisa lanjut kapan saja dari perangkat yang sama.'],
+            ['clipboard','Isi Langsung di Web','Tidak perlu kertas atau buku tulis. Semua latihan bisa dikerjakan langsung di browser kamu.'],
+            ['check','Kunci Jawaban Instan','Setelah selesai, cek jawabanmu dengan satu klik. Belajar mandiri jadi lebih efektif.'],
+            ['chart','Pantau Progress','Setiap modul punya progress tracker. Kamu tahu persis sudah sampai mana.'],
+            ['save','Tersimpan Otomatis','Jawabanmu tidak akan hilang. Bisa lanjut kapan saja dari perangkat yang sama.'],
         ] as [$icon,$title,$desc])
         <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
-            <div style="font-size:32px;margin-bottom:12px;">{{ $icon }}</div>
+            <div style="display:flex;justify-content:center;margin-bottom:12px;color:#1d4ed8;">
+                @if($icon === 'clipboard')
+                    <svg style="width:32px;height:32px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                @elseif($icon === 'check')
+                    <svg style="width:32px;height:32px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                @elseif($icon === 'chart')
+                    <svg style="width:32px;height:32px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                @elseif($icon === 'save')
+                    <svg style="width:32px;height:32px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+                @endif
+            </div>
             <p style="font-weight:700;color:#111827;font-size:14px;margin-bottom:8px;">{{ $title }}</p>
             <p style="font-size:13px;color:#6b7280;line-height:1.6;">{{ $desc }}</p>
         </div>
@@ -36,7 +46,7 @@
 
 {{-- Daftar Materi --}}
 <section class="max-w-4xl mx-auto px-4 pb-20">
-    <h2 style="font-size:1.3rem;font-weight:800;color:#111827;margin-bottom:20px;">📚 Pilih Materi</h2>
+    <h2 style="font-size:1.3rem;font-weight:800;color:#111827;margin-bottom:20px;">Pilih Materi</h2>
 
     <div style="display:grid;gap:20px;">
 

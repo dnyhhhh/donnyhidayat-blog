@@ -24,7 +24,7 @@
                     @if($ebook->cover_image)
                         <img src="{{ asset('storage/'.$ebook->cover_image) }}" class="w-full h-48 object-cover">
                     @else
-                        <div class="w-full h-48 bg-blue-100 flex items-center justify-center text-blue-400 text-4xl">📘</div>
+                        <div class="w-full h-48 bg-blue-100 flex items-center justify-center text-blue-400"><svg style="width:48px;height:48px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
                     @endif
                     <div class="p-5">
                         <h3 class="font-semibold text-gray-800">{{ $ebook->title }}</h3>
@@ -50,7 +50,7 @@
                         @if($course->cover_image)
                             <img src="{{ asset('storage/'.$course->cover_image) }}" class="w-full h-48 object-cover">
                         @else
-                            <div class="w-full h-48 bg-indigo-100 flex items-center justify-center text-indigo-400 text-4xl">🎓</div>
+                            <div class="w-full h-48 bg-indigo-100 flex items-center justify-center text-indigo-400"><svg style="width:48px;height:48px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></div>
                         @endif
                         <div class="p-5">
                             <h3 class="font-semibold text-gray-800">{{ $course->title }}</h3>
@@ -93,7 +93,7 @@
                 </div>
                 {{-- Bottom strip --}}
                 <div style="background:rgba(0,0,0,0.2);padding:14px 40px;display:flex;gap:24px;flex-wrap:wrap;">
-                    @foreach(['📘 Terjemahan Interaktif','💬 Dialog Bandara & Pesawat','💡 Grammar Notes','⭐ Self-Check & Nilai'] as $item)
+                    @foreach(['Terjemahan Interaktif','Dialog Bandara & Pesawat','Grammar Notes','Self-Check & Nilai'] as $item)
                     <span style="font-size:12px;color:#93c5fd;">{{ $item }}</span>
                     @endforeach
                 </div>
@@ -117,7 +117,7 @@
                     @if($template->cover_image)
                         <img src="{{ asset('storage/'.$template->cover_image) }}" class="w-full h-48 object-cover">
                     @else
-                        <div class="w-full h-48 flex items-center justify-center text-4xl" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);">🖥️</div>
+                        <div class="w-full h-48 flex items-center justify-center" style="background:linear-gradient(135deg,#dbeafe,#ede9fe);color:#818cf8;"><svg style="width:48px;height:48px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg></div>
                     @endif
                     <div class="p-5 flex flex-col flex-1 bg-white">
                         @if($template->tech_stack)

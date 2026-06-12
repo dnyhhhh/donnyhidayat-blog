@@ -9,7 +9,7 @@
                 @if($course->cover_image)
                     <img src="{{ asset('storage/'.$course->cover_image) }}" class="w-full h-48 object-cover">
                 @else
-                    <div class="w-full h-48 bg-indigo-100 flex items-center justify-center text-indigo-400 text-5xl">🎓</div>
+                    <div class="w-full h-48 bg-indigo-100 flex items-center justify-center text-indigo-400"><svg style="width:56px;height:56px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></div>
                 @endif
                 <div class="p-5">
                     <h3 class="font-semibold text-gray-800">{{ $course->title }}</h3>
@@ -22,7 +22,7 @@
             </a>
         @empty
             <div class="col-span-3 text-center text-gray-400 py-20">
-                <p class="text-4xl mb-3">🎓</p>
+                <p class="mb-3 flex justify-center text-indigo-300"><svg style="width:40px;height:40px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg></p>
                 <p>Belum ada kelas tersedia.</p>
             </div>
         @endforelse

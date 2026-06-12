@@ -4,7 +4,7 @@
     {{-- Header hasil --}}
     <div style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8);border-radius:20px;padding:28px 32px;margin-bottom:32px;color:#fff;">
         <p style="font-size:12px;font-weight:700;color:#93c5fd;letter-spacing:1px;margin-bottom:8px;">HASIL PROFILING</p>
-        <h1 style="font-size:1.5rem;font-weight:800;margin-bottom:4px;">Halo, {{ $profile['nama'] }}! 👋</h1>
+        <h1 style="font-size:1.5rem;font-weight:800;margin-bottom:4px;">Halo, {{ $profile['nama'] }}!</h1>
         <p style="font-size:13px;color:#bfdbfe;margin-bottom:16px;">
             {{ $profile['prodi'] }} · {{ $profile['fakultas'] }} · Semester {{ $profile['semester'] }}
         </p>
@@ -22,7 +22,7 @@
     {{-- Hasil --}}
     @if($results->isEmpty())
         <div style="background:#fff;border:1px dashed #e5e7eb;border-radius:16px;padding:48px;text-align:center;">
-            <p style="font-size:40px;margin-bottom:12px;">🔍</p>
+            <p style="display:flex;justify-content:center;margin-bottom:12px;color:#9ca3af;"><svg style="width:40px;height:40px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></p>
             <p style="font-weight:600;color:#374151;margin-bottom:8px;">Belum ada ide riset yang cocok</p>
             <p style="font-size:13px;color:#9ca3af;margin-bottom:20px;">Coba ubah kata kunci atau konsentrasi yang lebih umum</p>
             <a href="/riset" style="background:#1d4ed8;color:#fff;font-size:13px;font-weight:600;padding:10px 24px;border-radius:10px;text-decoration:none;">← Coba Lagi</a>
@@ -73,7 +73,7 @@
         </div>
 
         <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:16px 20px;margin-top:24px;display:flex;align-items:center;gap:12px;">
-            <span style="font-size:24px;">💡</span>
+            <span style="display:flex;align-items:center;color:#15803d;flex-shrink:0;"><svg style="width:24px;height:24px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></span>
             <p style="font-size:13px;color:#166534;">
                 Tidak menemukan yang cocok? <a href="/riset" style="font-weight:700;color:#15803d;">Coba ubah profil</a> atau langsung hubungi via WhatsApp untuk konsultasi topik custom.
             </p>

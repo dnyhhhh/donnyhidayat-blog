@@ -152,7 +152,7 @@
                             @else
                                 <div style="padding-bottom:56.25%;position:relative;border-radius:1rem;background:#f3f4f6;">
                                     <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#9ca3af;">
-                                        <p style="font-size:2.5rem;margin-bottom:.5rem;">📄</p>
+                                        <p style="margin-bottom:.5rem;display:flex;justify-content:center;color:#9ca3af;"><svg style="width:40px;height:40px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg></p>
                                         <p style="font-size:.875rem;">Materi teks</p>
                                     </div>
                                 </div>

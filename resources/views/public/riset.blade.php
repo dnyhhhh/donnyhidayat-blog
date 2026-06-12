@@ -86,8 +86,8 @@
             </div>
 
             <button type="submit"
-                    style="width:100%;background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:12px;border:none;cursor:pointer;margin-top:8px;letter-spacing:.02em;">
-                🔍 Temukan Ide Riset Saya
+                    style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:12px;border:none;cursor:pointer;margin-top:8px;letter-spacing:.02em;">
+                <svg style="width:18px;height:18px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Temukan Ide Riset Saya
             </button>
         </form>
     </div>
@@ -95,12 +95,20 @@
     {{-- Info --}}
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;">
         @foreach([
-            ['🎯', 'Dipersonalisasi', 'Ide disesuaikan dengan profil akademikmu'],
-            ['⚡', 'Instan', 'Hasil muncul langsung setelah isi form'],
-            ['💬', 'Bisa Diskusi', 'Setiap ide bisa langsung didiskusikan via WhatsApp'],
+            ['target', 'Dipersonalisasi', 'Ide disesuaikan dengan profil akademikmu'],
+            ['lightning', 'Instan', 'Hasil muncul langsung setelah isi form'],
+            ['chat', 'Bisa Diskusi', 'Setiap ide bisa langsung didiskusikan via WhatsApp'],
         ] as [$icon, $title, $desc])
         <div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:16px;text-align:center;">
-            <p style="font-size:24px;margin-bottom:6px;">{{ $icon }}</p>
+            <p style="display:flex;justify-content:center;margin-bottom:6px;color:#1d4ed8;">
+                @if($icon === 'target')
+                    <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg>
+                @elseif($icon === 'lightning')
+                    <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                @elseif($icon === 'chat')
+                    <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                @endif
+            </p>
             <p style="font-weight:700;font-size:13px;color:#111827;">{{ $title }}</p>
             <p style="font-size:12px;color:#6b7280;margin-top:4px;">{{ $desc }}</p>
         </div>

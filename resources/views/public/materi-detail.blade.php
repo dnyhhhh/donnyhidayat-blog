@@ -11,7 +11,7 @@
         @if($owned)
             <a href="/materi/modul/1"
                style="display:inline-flex;align-items:center;gap:8px;background:#16a34a;color:#fff;font-weight:700;font-size:16px;padding:15px 32px;border-radius:14px;text-decoration:none;">
-                📖 Lanjutkan Belajar — Modul 1
+                Lanjutkan Belajar — Modul 1
             </a>
         @else
             <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
@@ -26,13 +26,13 @@
                     <input type="hidden" name="id" value="1">
                     <button type="submit"
                             style="display:inline-flex;align-items:center;gap:8px;background:#16a34a;color:#fff;font-weight:700;font-size:16px;padding:15px 32px;border-radius:14px;border:none;cursor:pointer;">
-                        🚀 Mulai Belajar Sekarang
+                        Mulai Belajar Sekarang
                     </button>
                 </form>
                 @else
                 <a href="/login"
                    style="display:inline-flex;align-items:center;gap:8px;background:#16a34a;color:#fff;font-weight:700;font-size:16px;padding:15px 32px;border-radius:14px;text-decoration:none;">
-                    🚀 Daftar & Mulai Belajar
+                    Daftar & Mulai Belajar
                 </a>
                 @endauth
                 <p style="font-size:12px;color:#93c5fd;">Bayar sekali, akses selamanya. Konfirmasi dalam 1×24 jam.</p>
@@ -45,12 +45,20 @@
 <section class="max-w-4xl mx-auto px-4 py-14">
     <div class="grid md:grid-cols-3 gap-5">
         @foreach([
-            ['✏️','Latihan Interaktif','Isi langsung di web seperti mengisi buku latihan. Tidak perlu kertas dan pensil.'],
-            ['🔑','Kunci Jawaban Instan','Cek jawabanmu setelah selesai mengerjakan setiap bagian.'],
-            ['📊','Pantau Progress','Setiap modul punya progress tracker agar kamu tahu sejauh mana sudah belajar.'],
+            ['clipboard','Latihan Interaktif','Isi langsung di web seperti mengisi buku latihan. Tidak perlu kertas dan pensil.'],
+            ['check','Kunci Jawaban Instan','Cek jawabanmu setelah selesai mengerjakan setiap bagian.'],
+            ['chart','Pantau Progress','Setiap modul punya progress tracker agar kamu tahu sejauh mana sudah belajar.'],
         ] as [$icon, $title, $desc])
         <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center">
-            <div style="font-size:36px;margin-bottom:12px;">{{ $icon }}</div>
+            <div style="display:flex;justify-content:center;margin-bottom:12px;color:#1d4ed8;">
+                @if($icon === 'clipboard')
+                    <svg style="width:36px;height:36px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                @elseif($icon === 'check')
+                    <svg style="width:36px;height:36px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                @elseif($icon === 'chart')
+                    <svg style="width:36px;height:36px;" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                @endif
+            </div>
             <p style="font-weight:700;color:#111827;margin-bottom:8px;">{{ $title }}</p>
             <p style="font-size:13px;color:#6b7280;line-height:1.6;">{{ $desc }}</p>
         </div>
@@ -60,7 +68,7 @@
 
 {{-- Daftar Modul --}}
 <section class="max-w-4xl mx-auto px-4 pb-16">
-    <h2 style="font-size:1.3rem;font-weight:800;color:#111827;margin-bottom:20px;">📚 Isi Materi — 5 Tema, 20 Unit</h2>
+    <h2 style="font-size:1.3rem;font-weight:800;color:#111827;margin-bottom:20px;">Isi Materi — 5 Tema, 20 Unit</h2>
 
     @php
     $modules = [
@@ -111,13 +119,13 @@
             <input type="hidden" name="id" value="1">
             <button type="submit"
                     style="background:#16a34a;color:#fff;font-weight:700;font-size:15px;padding:13px 30px;border-radius:12px;border:none;cursor:pointer;">
-                🚀 Berlangganan Sekarang
+                Berlangganan Sekarang
             </button>
         </form>
         @else
         <a href="/login"
            style="display:inline-block;background:#16a34a;color:#fff;font-weight:700;font-size:15px;padding:13px 30px;border-radius:12px;text-decoration:none;">
-            🚀 Masuk & Berlangganan
+            Masuk & Berlangganan
         </a>
         @endauth
     </div>
