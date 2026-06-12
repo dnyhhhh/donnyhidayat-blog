@@ -9,8 +9,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $orders = auth()->user()->orders()->latest()->with([])->paginate(10);
-        return view('member.dashboard', compact('orders'));
+        $user   = auth()->user();
+        $ebooks  = $user->orders()->where('orderable_type', 'ebook')->latest()->get();
+        $courses = $user->orders()->where('orderable_type', 'course')->latest()->get();
+        $materis = $user->orders()->where('orderable_type', 'materi')->latest()->get();
+        return view('member.dashboard', compact('ebooks', 'courses', 'materis'));
     }
 
     public function orderDetail(Order $order)
