@@ -2,6 +2,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Materi;
 
 class Order extends Model
 {
@@ -16,6 +17,7 @@ class Order extends Model
         return match($this->orderable_type) {
             'ebook'  => $this->belongsTo(Ebook::class, 'orderable_id'),
             'course' => $this->belongsTo(Course::class, 'orderable_id'),
+            'materi' => $this->belongsTo(Materi::class, 'orderable_id'),
             default  => null,
         };
     }

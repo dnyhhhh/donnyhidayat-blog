@@ -61,13 +61,15 @@ class PublicController extends Controller
     public function checkout(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:ebook,course',
+            'type' => 'required|in:ebook,course,materi',
             'id'   => 'required|integer',
         ]);
 
-        $model = $request->type === 'ebook'
-            ? Ebook::findOrFail($request->id)
-            : Course::findOrFail($request->id);
+        $model = match($request->type) {
+            'ebook'  => Ebook::findOrFail($request->id),
+            'course' => Course::findOrFail($request->id),
+            'materi' => \App\Models\Materi::findOrFail($request->id),
+        };
 
         if (auth()->user()->hasAccess($request->type, $model->id)) {
             return back()->with('info', 'Anda sudah memiliki akses ke produk ini.');
@@ -95,6 +97,19 @@ class PublicController extends Controller
         $order->update(['payment_proof' => $path]);
 
         return back()->with('success', 'Bukti pembayaran berhasil diunggah. Menunggu konfirmasi admin.');
+    }
+
+    public function materiIndex()
+    {
+        $materi = \App\Models\Materi::findOrFail(1);
+        $owned  = auth()->check() && auth()->user()->hasAccess('materi', 1);
+        return view('public.materi-index', compact('materi', 'owned'));
+    }
+
+    public function materiModul(int $modul)
+    {
+        abort_unless(auth()->check() && auth()->user()->hasAccess('materi', 1), 403);
+        return view("public.materi-modul-{$modul}");
     }
 
     public function tentang()

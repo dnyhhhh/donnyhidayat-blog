@@ -18,6 +18,7 @@
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-600">
                 <a href="/ebook" class="hover:text-blue-700">Ebook</a>
                 <a href="/kelas" class="hover:text-blue-700">Kelas</a>
+                <a href="/materi" class="hover:text-blue-700">Materi Interaktif</a>
                 <a href="/blog" class="hover:text-blue-700">Blog</a>
                 <a href="/tentang" class="hover:text-blue-700">Tentang</a>
             </div>
@@ -48,6 +49,7 @@
         <div x-show="open" x-transition style="display:none;" class="md:hidden border-t border-gray-100 bg-white px-4 pb-5 pt-3 space-y-1">
             <a href="/ebook" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Ebook</a>
             <a href="/kelas" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Kelas</a>
+            <a href="/materi" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Materi Interaktif</a>
             <a href="/blog" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Blog</a>
             <a href="/tentang" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Tentang</a>
 
