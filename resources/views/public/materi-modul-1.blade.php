@@ -10,7 +10,7 @@
             <h1 style="font-size:1.4rem;font-weight:800;margin-bottom:4px;">Perjalanan & Transportasi</h1>
             <p style="font-size:13px;color:#bfdbfe;">Travel, Airports, Planes & New Experiences</p>
             <div style="margin-top:16px;background:rgba(255,255,255,0.15);border-radius:8px;height:8px;overflow:hidden;">
-                <div style="height:100%;background:#4ade80;border-radius:8px;transition:width .5s;" :style="'width:'+progressPct()+'%'"></div>
+                <div :style="'height:100%;background:#4ade80;border-radius:8px;transition:width .5s;width:'+progressPct()+'%'"></div>
             </div>
             <p style="font-size:12px;color:#93c5fd;margin-top:6px;" x-text="progressPct()+'% selesai'"></p>
         </div>
@@ -296,7 +296,7 @@
             <p style="font-size:13px;color:#6b7280;margin-bottom:4px;">Progress Modul 1</p>
             <p style="font-size:2.5rem;font-weight:900;color:#15803d;" x-text="progressPct()+'%'"></p>
             <div style="background:#e5e7eb;border-radius:8px;height:10px;margin-top:8px;overflow:hidden;">
-                <div style="height:100%;background:linear-gradient(90deg,#16a34a,#4ade80);border-radius:8px;transition:width .5s;" :style="'width:'+progressPct()+'%'"></div>
+                <div :style="'height:100%;background:linear-gradient(90deg,#16a34a,#4ade80);border-radius:8px;transition:width .5s;width:'+progressPct()+'%'"></div>
             </div>
         </div>
 
