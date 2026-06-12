@@ -65,6 +65,42 @@
         </div>
     </section>
 
+    {{-- Materi Interaktif --}}
+    <section class="max-w-6xl mx-auto px-4 py-16">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold">Materi Interaktif</h2>
+            <a href="/materi" class="text-blue-700 text-sm hover:underline">Lihat semua →</a>
+        </div>
+        <div style="background:linear-gradient(135deg,#1e3a5f,#1d4ed8);border-radius:20px;overflow:hidden;">
+            <div style="display:flex;flex-direction:column;gap:0;">
+                {{-- Content --}}
+                <div style="padding:36px 40px;color:#fff;flex:1;">
+                    <span style="background:rgba(255,255,255,0.15);font-size:11px;font-weight:700;letter-spacing:.07em;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:14px;">🌍 BAHASA INGGRIS</span>
+                    <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:10px;">English Unlocked</h3>
+                    <p style="font-size:14px;color:#bfdbfe;line-height:1.7;margin-bottom:20px;max-width:520px;">Belajar bahasa Inggris secara interaktif langsung di browser — terjemahkan dialog, isi soal, cek jawaban, dan pantau progressmu. 5 tema, 20 unit latihan.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+                        @foreach(['✓ 5 Tema','✓ 20 Unit','✓ Kunci Jawaban','✓ Progress Tracker','✓ Akses Selamanya'] as $f)
+                        <span style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);font-size:12px;color:#e0f2fe;padding:4px 12px;border-radius:20px;">{{ $f }}</span>
+                        @endforeach
+                    </div>
+                    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                        <a href="/materi/english-unlocked"
+                           style="display:inline-flex;align-items:center;gap:6px;background:#fff;color:#1d4ed8;font-weight:700;font-size:14px;padding:11px 24px;border-radius:12px;text-decoration:none;">
+                            Mulai Belajar →
+                        </a>
+                        <span style="font-size:1.3rem;font-weight:800;color:#fff;">Rp 12.000 <span style="font-size:12px;font-weight:400;color:#93c5fd;">/ selamanya</span></span>
+                    </div>
+                </div>
+                {{-- Bottom strip --}}
+                <div style="background:rgba(0,0,0,0.2);padding:14px 40px;display:flex;gap:24px;flex-wrap:wrap;">
+                    @foreach(['📘 Terjemahan Interaktif','💬 Dialog Bandara & Pesawat','💡 Grammar Notes','⭐ Self-Check & Nilai'] as $item)
+                    <span style="font-size:12px;color:#93c5fd;">{{ $item }}</span>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
     {{-- Artikel Terbaru --}}
     <section class="max-w-6xl mx-auto px-4 py-16">
         <div class="flex items-center justify-between mb-8">
