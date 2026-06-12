@@ -23,6 +23,8 @@ Route::get('/tentang', [PublicController::class, 'tentang']);
 Route::get('/riset', [RisetController::class, 'index']);
 Route::post('/riset/generate', [RisetController::class, 'generate']);
 Route::get('/riset/resume', [RisetController::class, 'resume'])->middleware('auth');
+Route::get('/riset/hasil', [RisetController::class, 'hasil'])->middleware('auth');
+Route::get('/riset/reset', [RisetController::class, 'reset'])->middleware('auth');
 Route::get('/blog', [PublicController::class, 'blogIndex']);
 Route::get('/blog/{slug}', [PublicController::class, 'blogShow']);
 

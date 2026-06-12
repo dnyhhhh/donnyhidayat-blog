@@ -18,7 +18,7 @@
         </div>
 
         {{-- Tombol Edit Profil --}}
-        <a href="/riset"
+        <a href="/riset/reset"
            class="absolute top-5 right-5 inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full transition">
             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             Edit Profil
@@ -33,7 +33,7 @@
             </div>
             <p class="font-semibold text-gray-700 mb-2">Belum ada ide riset yang cocok</p>
             <p class="text-sm text-gray-400 mb-5">Coba ubah bidang minat atau konsentrasi yang lebih umum</p>
-            <a href="/riset" class="bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl">← Edit Profil</a>
+            <a href="/riset/reset" class="bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl">← Edit Profil</a>
         </div>
     @else
         <p class="text-sm text-gray-500 mb-4">
@@ -82,7 +82,7 @@
             <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
             <p class="text-sm text-green-800">
                 Tidak menemukan yang cocok?
-                <a href="/riset" class="font-bold text-green-700 hover:underline">Edit profil</a>
+                <a href="/riset/reset" class="font-bold text-green-700 hover:underline">Edit profil</a>
                 atau langsung hubungi via WhatsApp untuk konsultasi topik custom.
             </p>
         </div>

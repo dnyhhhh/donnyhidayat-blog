@@ -8,6 +8,11 @@ class RisetController extends Controller
 {
     public function index()
     {
+        // Kalau sudah punya hasil sebelumnya, langsung redirect ke hasil
+        if (auth()->check() && session('riset_profile')) {
+            return redirect('/riset/hasil');
+        }
+
         return view('public.riset');
     }
 
@@ -29,11 +34,9 @@ class RisetController extends Controller
         }
 
         $profile = $request->only(['prodi', 'konsentrasi', 'semester', 'bidang', 'metode', 'akses']);
+        session(['riset_profile' => $profile]);
 
-        return view('public.riset-hasil', [
-            'results' => $this->findMatches($profile),
-            'profile' => $profile,
-        ]);
+        return redirect('/riset/hasil');
     }
 
     public function resume()
@@ -44,10 +47,29 @@ class RisetController extends Controller
             return redirect('/riset');
         }
 
+        session(['riset_profile' => $profile]);
+
+        return redirect('/riset/hasil');
+    }
+
+    public function hasil()
+    {
+        $profile = session('riset_profile');
+
+        if (!$profile) {
+            return redirect('/riset');
+        }
+
         return view('public.riset-hasil', [
             'results' => $this->findMatches($profile),
             'profile' => $profile,
         ]);
+    }
+
+    public function reset()
+    {
+        session()->forget('riset_profile');
+        return redirect('/riset');
     }
 
     private function findMatches(array $profile)
