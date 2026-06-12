@@ -32,9 +32,10 @@
     {{-- Tab menu --}}
     <div style="display:flex;gap:8px;border-bottom:2px solid #e5e7eb;margin-bottom:28px;overflow-x:auto;">
         @foreach([
-            ['ebook',  '📘', 'Ebook Saya',           $ebooks->count()],
-            ['kelas',  '🎓', 'Kelas Saya',            $courses->count()],
-            ['materi', '✏️', 'Materi Interaktif',     $materis->count()],
+            ['ebook',   '📘', 'Ebook Saya',           $ebooks->count()],
+            ['kelas',   '🎓', 'Kelas Saya',            $courses->count()],
+            ['materi',  '✏️', 'Materi Interaktif',     $materis->count()],
+            ['riwayat', '🧾', 'Riwayat',               $allOrders->count()],
         ] as [$key, $icon, $label, $count])
         <button @click="tab='{{ $key }}'; window.location.hash='{{ $key }}'"
                 :style="tab==='{{ $key }}'
@@ -166,6 +167,62 @@
                                 <a href="/member/order/{{ $item->id }}" class="btn-detail">Detail</a>
                             @endif
                         @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
+
+    {{-- TAB: RIWAYAT --}}
+    <div x-show="tab==='riwayat'" style="display:none;">
+        @if($allOrders->isEmpty())
+            <div class="empty-state">
+                <p style="font-size:40px;margin-bottom:12px;">🧾</p>
+                <p style="font-weight:600;color:#374151;margin-bottom:6px;">Belum ada transaksi</p>
+                <a href="/ebook" style="color:#1d4ed8;font-size:13px;">Mulai belanja →</a>
+            </div>
+        @else
+            <div class="space-y-3">
+                @foreach($allOrders as $order)
+                @php
+                    $typeIcon = match($order->orderable_type) {
+                        'ebook'  => '📘',
+                        'course' => '🎓',
+                        'materi' => '✏️',
+                        'bundle' => '🔥',
+                        default  => '📄',
+                    };
+                    $typeLabel = match($order->orderable_type) {
+                        'ebook'  => 'Ebook',
+                        'course' => 'Kelas',
+                        'materi' => 'Materi Interaktif',
+                        'bundle' => 'Paket Bundling',
+                        default  => ucfirst($order->orderable_type),
+                    };
+                    $productName = match($order->orderable_type) {
+                        'bundle' => 'Paket Bundling — Akses Semua Konten',
+                        default  => $order->orderable?->title ?? '—',
+                    };
+                @endphp
+                <div class="order-card">
+                    <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;">
+                        <div style="width:44px;height:44px;border-radius:10px;background:#f9fafb;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">{{ $typeIcon }}</div>
+                        <div style="min-width:0;">
+                            <p style="font-weight:600;color:#111827;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $productName }}</p>
+                            <div style="display:flex;align-items:center;gap:8px;margin-top:3px;flex-wrap:wrap;">
+                                <span style="font-size:11px;color:#9ca3af;">{{ $order->invoice_number }}</span>
+                                <span style="font-size:11px;color:#d1d5db;">·</span>
+                                <span style="font-size:11px;color:#9ca3af;">{{ $order->created_at->format('d M Y') }}</span>
+                                <span style="font-size:11px;color:#d1d5db;">·</span>
+                                <span style="font-size:11px;color:#6b7280;font-weight:600;">Rp {{ number_format($order->amount, 0, ',', '.') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+                        @include('member._status-badge', ['status' => $order->status])
+                        <a href="/member/order/{{ $order->id }}" class="btn-detail">Detail</a>
                     </div>
                 </div>
                 @endforeach

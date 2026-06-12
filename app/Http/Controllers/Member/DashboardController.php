@@ -26,8 +26,9 @@ class DashboardController extends Controller
         }
 
         $bundleOrder = $user->orders()->where('orderable_type', 'bundle')->where('status', 'paid')->first();
+        $allOrders   = $user->orders()->latest()->get();
 
-        return view('member.dashboard', compact('ebooks', 'courses', 'materis', 'hasBundle', 'bundleOrder'));
+        return view('member.dashboard', compact('ebooks', 'courses', 'materis', 'hasBundle', 'bundleOrder', 'allOrders'));
     }
 
     public function orderDetail(Order $order)
