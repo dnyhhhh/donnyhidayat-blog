@@ -2,13 +2,31 @@
 <div class="max-w-4xl mx-auto px-4 py-10" x-data="{ tab: window.location.hash.replace('#','') || 'ebook' }">
 
     {{-- Header --}}
-    <div class="mb-8">
+    <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-800">Halo, {{ auth()->user()->name }} 👋</h1>
         <p class="text-gray-500 text-sm mt-1">Akses semua konten yang sudah kamu beli di sini.</p>
     </div>
 
     @if(session('success'))
-        <div class="bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3 mb-6">{{ session('success') }}</div>
+        <div class="bg-green-50 text-green-700 text-sm rounded-lg px-4 py-3 mb-4">{{ session('success') }}</div>
+    @endif
+
+    {{-- Banner Bundle --}}
+    @if($hasBundle)
+    <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-radius:16px;padding:18px 24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+            <span style="font-size:28px;">🔥</span>
+            <div>
+                <p style="font-weight:800;color:#fff;font-size:15px;">Paket Bundling Aktif</p>
+                <p style="font-size:12px;color:#a5b4fc;margin-top:2px;">Kamu punya akses ke semua ebook, kelas, dan materi interaktif</p>
+            </div>
+        </div>
+        @if($bundleOrder)
+        <span style="background:rgba(255,255,255,0.15);color:#c7d2fe;font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;">
+            {{ $bundleOrder->invoice_number }}
+        </span>
+        @endif
+    </div>
     @endif
 
     {{-- Tab menu --}}
@@ -41,22 +59,30 @@
             </div>
         @else
             <div class="space-y-3">
-                @foreach($ebooks as $order)
-                @php $item = \App\Models\Ebook::find($order->orderable_id); @endphp
+                @foreach($ebooks as $item)
+                @php $isBundle = $hasBundle; @endphp
                 <div class="order-card">
                     <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;">
                         <div style="width:44px;height:44px;border-radius:10px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📘</div>
                         <div style="min-width:0;">
-                            <p style="font-weight:600;color:#111827;font-size:14px;">{{ $item?->title ?? '—' }}</p>
-                            <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $order->invoice_number }} · {{ $order->created_at->format('d M Y') }}</p>
+                            <p style="font-weight:600;color:#111827;font-size:14px;">{{ $isBundle ? $item->title : ($item->orderable->title ?? '—') }}</p>
+                            @if($isBundle)
+                                <span style="font-size:11px;background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:10px;font-weight:600;">🔥 via Paket Bundling</span>
+                            @else
+                                <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $item->invoice_number }} · {{ $item->created_at->format('d M Y') }}</p>
+                            @endif
                         </div>
                     </div>
                     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
-                        @include('member._status-badge', ['status' => $order->status])
-                        @if($order->status === 'paid')
-                            <a href="/member/ebook/{{ $order->orderable_id }}/download" class="btn-akses">Download</a>
+                        @if($isBundle)
+                            <a href="/member/ebook/{{ $item->id }}/download" class="btn-akses">Download</a>
                         @else
-                            <a href="/member/order/{{ $order->id }}" class="btn-detail">Detail</a>
+                            @include('member._status-badge', ['status' => $item->status])
+                            @if($item->status === 'paid')
+                                <a href="/member/ebook/{{ $item->orderable_id }}/download" class="btn-akses">Download</a>
+                            @else
+                                <a href="/member/order/{{ $item->id }}" class="btn-detail">Detail</a>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -75,22 +101,29 @@
             </div>
         @else
             <div class="space-y-3">
-                @foreach($courses as $order)
-                @php $item = \App\Models\Course::find($order->orderable_id); @endphp
+                @foreach($courses as $item)
                 <div class="order-card">
                     <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;">
                         <div style="width:44px;height:44px;border-radius:10px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🎓</div>
                         <div style="min-width:0;">
-                            <p style="font-weight:600;color:#111827;font-size:14px;">{{ $item?->title ?? '—' }}</p>
-                            <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $order->invoice_number }} · {{ $order->created_at->format('d M Y') }}</p>
+                            <p style="font-weight:600;color:#111827;font-size:14px;">{{ $hasBundle ? $item->title : ($item->orderable->title ?? '—') }}</p>
+                            @if($hasBundle)
+                                <span style="font-size:11px;background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:10px;font-weight:600;">🔥 via Paket Bundling</span>
+                            @else
+                                <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $item->invoice_number }} · {{ $item->created_at->format('d M Y') }}</p>
+                            @endif
                         </div>
                     </div>
                     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
-                        @include('member._status-badge', ['status' => $order->status])
-                        @if($order->status === 'paid' && $item)
+                        @if($hasBundle)
                             <a href="/kelas/{{ $item->slug }}" class="btn-akses">Buka Kelas</a>
                         @else
-                            <a href="/member/order/{{ $order->id }}" class="btn-detail">Detail</a>
+                            @include('member._status-badge', ['status' => $item->status])
+                            @if($item->status === 'paid')
+                                <a href="/kelas/{{ $item->orderable->slug }}" class="btn-akses">Buka Kelas</a>
+                            @else
+                                <a href="/member/order/{{ $item->id }}" class="btn-detail">Detail</a>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -109,21 +142,29 @@
             </div>
         @else
             <div class="space-y-3">
-                @foreach($materis as $order)
+                @foreach($materis as $item)
                 <div class="order-card">
                     <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;">
                         <div style="width:44px;height:44px;border-radius:10px;background:#faf5ff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">✏️</div>
                         <div style="min-width:0;">
-                            <p style="font-weight:600;color:#111827;font-size:14px;">English Unlocked — Materi Interaktif</p>
-                            <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $order->invoice_number }} · {{ $order->created_at->format('d M Y') }}</p>
+                            <p style="font-weight:600;color:#111827;font-size:14px;">{{ $hasBundle ? $item->title : ($item->orderable->title ?? 'English Unlocked — Materi Interaktif') }}</p>
+                            @if($hasBundle)
+                                <span style="font-size:11px;background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:10px;font-weight:600;">🔥 via Paket Bundling</span>
+                            @else
+                                <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $item->invoice_number }} · {{ $item->created_at->format('d M Y') }}</p>
+                            @endif
                         </div>
                     </div>
                     <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
-                        @include('member._status-badge', ['status' => $order->status])
-                        @if($order->status === 'paid')
+                        @if($hasBundle)
                             <a href="/materi/modul/1" class="btn-akses">Buka Materi</a>
                         @else
-                            <a href="/member/order/{{ $order->id }}" class="btn-detail">Detail</a>
+                            @include('member._status-badge', ['status' => $item->status])
+                            @if($item->status === 'paid')
+                                <a href="/materi/modul/1" class="btn-akses">Buka Materi</a>
+                            @else
+                                <a href="/member/order/{{ $item->id }}" class="btn-detail">Detail</a>
+                            @endif
                         @endif
                     </div>
                 </div>
