@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 
 class PublicController extends Controller
 {
@@ -77,6 +79,7 @@ class PublicController extends Controller
                 'amount'         => 297000,
                 'status'         => 'pending',
             ]);
+            Mail::to($order->user->email)->send(new OrderPlaced($order));
             return redirect("/member/order/{$order->id}");
         }
 
@@ -98,6 +101,8 @@ class PublicController extends Controller
             'amount'         => $model->price,
             'status'         => 'pending',
         ]);
+
+        Mail::to($order->user->email)->send(new OrderPlaced($order));
 
         return redirect("/member/order/{$order->id}");
     }
