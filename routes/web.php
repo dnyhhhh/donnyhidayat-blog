@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Member\DashboardController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\RisetController;
 use Illuminate\Support\Facades\Route;
 
 // Public
@@ -19,6 +20,8 @@ Route::get('/materi', [PublicController::class, 'materiIndex']);
 Route::get('/materi/modul/{modul}', [PublicController::class, 'materiModul'])->middleware('auth');
 Route::get('/materi/{slug}', [PublicController::class, 'materiDetail'])->where('slug', '[a-z0-9\-]+');
 Route::get('/tentang', [PublicController::class, 'tentang']);
+Route::get('/riset', [RisetController::class, 'index']);
+Route::post('/riset/generate', [RisetController::class, 'generate']);
 Route::get('/blog', [PublicController::class, 'blogIndex']);
 Route::get('/blog/{slug}', [PublicController::class, 'blogShow']);
 
@@ -52,6 +55,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::delete('/kelas/{kela}/lessons/{lesson}', [Admin\CourseController::class, 'destroyLesson']);
     Route::resource('/blog', Admin\PostController::class);
     Route::resource('/template', Admin\TemplateController::class);
+    Route::resource('/riset', Admin\RisetIdeaController::class);
 
     Route::get('/order', [Admin\OrderController::class, 'index']);
     Route::post('/order/{order}/approve', [Admin\OrderController::class, 'approve']);

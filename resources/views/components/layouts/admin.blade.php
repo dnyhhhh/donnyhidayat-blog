@@ -22,6 +22,7 @@
             <a href="/admin/kelas" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-800">Kelas</a>
             <a href="/admin/template" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-800">Template</a>
             <a href="/admin/blog" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-800">Blog</a>
+            <a href="/admin/riset" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-800">Ide Riset</a>
             <a href="/admin/order" class="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-800">Order</a>
         </nav>
         <div class="px-4 py-4 border-t border-blue-800">

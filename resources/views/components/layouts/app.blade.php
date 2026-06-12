@@ -76,6 +76,7 @@
                     </div>
                 </div>
 
+                <a href="/riset" class="hover:text-blue-700">Ide Riset</a>
                 <a href="/blog" class="hover:text-blue-700">Blog</a>
                 <a href="/tentang" class="hover:text-blue-700">Tentang</a>
             </div>
@@ -143,6 +144,7 @@
                 </div>
             </div>
 
+            <a href="/riset" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Ide Riset</a>
             <a href="/blog" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Blog</a>
             <a href="/tentang" class="block py-2.5 text-sm font-medium text-gray-700 hover:text-blue-700">Tentang</a>
 
