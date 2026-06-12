@@ -179,5 +179,82 @@
 
     @livewireScripts
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    {{-- Global confirm modal --}}
+    <div x-data="{
+            open: false,
+            message: '',
+            target: null,
+            form: null,
+            ask(msg, el, form) { this.message = msg; this.target = el; this.form = form || null; this.open = true; },
+            confirm() {
+                this.open = false;
+                this.$nextTick(() => {
+                    if (this.form) { this.form.submit(); }
+                    else if (this.target) { this.target.click(); }
+                });
+            },
+            cancel() { this.open = false; this.target = null; this.form = null; }
+         }"
+         x-on:confirm-action.window="ask($event.detail.message, $event.detail.target, $event.detail._form)"
+         x-show="open"
+         x-transition.opacity
+         class="fixed inset-0 z-[999] flex items-center justify-center px-4"
+         style="display:none;">
+
+        {{-- Backdrop --}}
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="cancel()"></div>
+
+        {{-- Dialog --}}
+        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6 text-center"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100">
+            <div class="flex justify-center mb-3">
+                <div class="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    </svg>
+                </div>
+            </div>
+            <p class="text-sm text-gray-700 mb-6" x-text="message"></p>
+            <div class="flex gap-3">
+                <button @click="cancel()"
+                        class="flex-1 border border-gray-200 text-gray-600 font-semibold text-sm py-2.5 rounded-xl hover:bg-gray-50 transition">
+                    Batal
+                </button>
+                <button @click="confirm()"
+                        class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 rounded-xl transition">
+                    Ya, Lanjutkan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            const el = e.target.closest('[data-confirm]');
+            if (!el) return;
+            e.preventDefault();
+            e.stopPropagation();
+            const msg = el.dataset.confirm;
+
+            let action;
+            if (el.dataset.submitForm !== undefined) {
+                // Button di dalam form — submit form parent setelah konfirmasi
+                const form = el.closest('form');
+                action = { message: msg, target: null, _form: form };
+            } else {
+                // Link biasa — buat ghost link untuk dinavigasi
+                const ghost = document.createElement('a');
+                ghost.href = el.href || el.closest('a')?.href;
+                ghost.style.display = 'none';
+                document.body.appendChild(ghost);
+                action = { message: msg, target: ghost };
+            }
+
+            window.dispatchEvent(new CustomEvent('confirm-action', { detail: action }));
+        }, true);
+    </script>
 </body>
 </html>

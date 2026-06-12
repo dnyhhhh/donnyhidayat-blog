@@ -19,6 +19,7 @@
 
         {{-- Tombol Edit Profil --}}
         <a href="/riset/reset"
+           data-confirm="Yakin ingin mengisi ulang form? Hasil rekomendasi sebelumnya akan dihapus."
            class="absolute top-5 right-5 inline-flex items-center gap-1.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full transition">
             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             Edit Profil
@@ -33,7 +34,7 @@
             </div>
             <p class="font-semibold text-gray-700 mb-2">Belum ada ide riset yang cocok</p>
             <p class="text-sm text-gray-400 mb-5">Coba ubah bidang minat atau konsentrasi yang lebih umum</p>
-            <a href="/riset/reset" class="bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl">← Edit Profil</a>
+            <a href="/riset/reset" data-confirm="Yakin ingin mengisi ulang form? Hasil rekomendasi sebelumnya akan dihapus." class="bg-blue-700 text-white text-sm font-semibold px-6 py-2.5 rounded-xl">← Edit Profil</a>
         </div>
     @else
         <p class="text-sm text-gray-500 mb-4">

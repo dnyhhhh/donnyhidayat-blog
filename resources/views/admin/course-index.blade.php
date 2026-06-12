@@ -33,9 +33,9 @@
                         </td>
                         <td class="px-6 py-4 flex gap-3">
                             <a href="/admin/kelas/{{ $course->id }}/edit" class="text-blue-700 hover:underline text-xs">Edit & Pelajaran</a>
-                            <form method="POST" action="/admin/kelas/{{ $course->id }}" onsubmit="return confirm('Hapus kelas ini?')">
+                            <form method="POST" action="/admin/kelas/{{ $course->id }}" >
                                 @csrf @method('DELETE')
-                                <button class="text-red-600 hover:underline text-xs">Hapus</button>
+                                <button type="button" data-confirm="Yakin ingin menghapus data ini? Tindakan ini tidak bisa dibatalkan." data-submit-form class="text-red-600 hover:underline text-xs">Hapus</button>
                             </form>
                         </td>
                     </tr>

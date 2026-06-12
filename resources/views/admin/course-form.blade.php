@@ -135,10 +135,9 @@
                                     </label>
                                     <div class="flex items-center justify-between">
                                         <button type="submit" class="bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-blue-800">Simpan</button>
-                                        <form method="POST" action="/admin/kelas/{{ $course->id }}/lessons/{{ $lesson->id }}"
-                                              onsubmit="return confirm('Hapus pelajaran ini?')">
+                                        <form method="POST" action="/admin/kelas/{{ $course->id }}/lessons/{{ $lesson->id }}">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="text-xs text-red-600 hover:underline">Hapus</button>
+                                            <button type="button" data-confirm="Yakin ingin menghapus pelajaran ini?" data-submit-form class="text-xs text-red-600 hover:underline">Hapus</button>
                                         </form>
                                     </div>
                                 </form>

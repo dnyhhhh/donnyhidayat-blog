@@ -31,9 +31,9 @@
                         </td>
                         <td class="px-6 py-4 flex gap-3">
                             <a href="/admin/blog/{{ $post->id }}/edit" class="text-blue-700 hover:underline text-xs">Edit</a>
-                            <form method="POST" action="/admin/blog/{{ $post->id }}" onsubmit="return confirm('Hapus artikel ini?')">
+                            <form method="POST" action="/admin/blog/{{ $post->id }}" >
                                 @csrf @method('DELETE')
-                                <button class="text-red-600 hover:underline text-xs">Hapus</button>
+                                <button type="button" data-confirm="Yakin ingin menghapus data ini? Tindakan ini tidak bisa dibatalkan." data-submit-form class="text-red-600 hover:underline text-xs">Hapus</button>
                             </form>
                         </td>
                     </tr>

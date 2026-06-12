@@ -39,7 +39,7 @@
                     <td class="px-5 py-3">
                         <div class="flex gap-3">
                             <a href="/admin/riset/{{ $idea->id }}/edit" class="text-blue-600 hover:underline text-xs">Edit</a>
-                            <form method="POST" action="/admin/riset/{{ $idea->id }}" onsubmit="return confirm('Hapus ide ini?')">
+                            <form method="POST" action="/admin/riset/{{ $idea->id }}" >
                                 @csrf @method('DELETE')
                                 <button class="text-red-500 hover:underline text-xs">Hapus</button>
                             </form>

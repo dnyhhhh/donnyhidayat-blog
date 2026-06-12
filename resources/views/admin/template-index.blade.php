@@ -40,7 +40,7 @@
                     <td class="px-5 py-3">
                         <div class="flex gap-3">
                             <a href="/admin/template/{{ $template->id }}/edit" class="text-blue-600 hover:underline text-xs">Edit</a>
-                            <form method="POST" action="/admin/template/{{ $template->id }}" onsubmit="return confirm('Hapus template ini?')">
+                            <form method="POST" action="/admin/template/{{ $template->id }}" >
                                 @csrf @method('DELETE')
                                 <button class="text-red-500 hover:underline text-xs">Hapus</button>
                             </form>
