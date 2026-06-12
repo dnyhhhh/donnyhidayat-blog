@@ -110,7 +110,7 @@
             <div x-data="{ produk: false }">
                 <button @click="produk=!produk" class="w-full flex items-center justify-between py-2.5 text-sm font-medium text-gray-700">
                     <span>Produk</span>
-                    <svg :style="produk ? 'transform:rotate(180deg)' : ''" style="width:14px;height:14px;transition:transform .25s ease;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                    <svg :style="'width:14px;height:14px;flex-shrink:0;transition:transform .25s ease;' + (produk ? 'transform:rotate(180deg)' : '')" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
                 </button>
                 <div x-show="produk"
                      x-transition:enter="transition ease-out duration-200"
