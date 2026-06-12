@@ -67,6 +67,25 @@
             </div>
         </div>
 
+        {{-- Captcha --}}
+        @php $captcha = $captcha ?? session('captcha'); @endphp
+        <div>
+            <label class="block text-xs font-semibold text-gray-600 mb-1.5">
+                Verifikasi: berapa hasil dari
+                <span class="text-blue-700 font-extrabold">{{ $captcha['a'] }} + {{ $captcha['b'] }}</span>?
+            </label>
+            <div class="relative">
+                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 13h.01M13 13h.01M9 7v3m4-3v3m4 3h.01"/></svg>
+                </span>
+                <input type="number" name="captcha" required placeholder="Jawaban"
+                    class="w-full pl-10 pr-4 py-2.5 text-sm border {{ $errors->has('captcha') ? 'border-red-400 bg-red-50' : 'border-gray-200' }} rounded-xl outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition">
+            </div>
+            @error('captcha')
+                <p class="text-xs text-red-600 mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
         <button type="submit"
                 class="w-full bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-800 hover:to-blue-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-sm shadow-blue-200 mt-2">
             Buat Akun Sekarang
