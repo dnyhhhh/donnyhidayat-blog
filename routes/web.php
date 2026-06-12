@@ -12,6 +12,8 @@ Route::get('/ebook', [PublicController::class, 'ebookIndex']);
 Route::get('/ebook/{slug}', [PublicController::class, 'ebookShow']);
 Route::get('/kelas', [PublicController::class, 'courseIndex']);
 Route::get('/kelas/{slug}', [PublicController::class, 'courseShow']);
+Route::get('/template', [PublicController::class, 'templateIndex']);
+Route::get('/template/{slug}', [PublicController::class, 'templateShow']);
 Route::get('/bundling', [PublicController::class, 'bundling']);
 Route::get('/materi', [PublicController::class, 'materiIndex']);
 Route::get('/materi/modul/{modul}', [PublicController::class, 'materiModul'])->middleware('auth');
@@ -36,6 +38,7 @@ Route::middleware('auth')->prefix('member')->group(function () {
     Route::post('/checkout', [PublicController::class, 'checkout']);
     Route::post('/order/{order}/proof', [PublicController::class, 'uploadProof']);
     Route::get('/ebook/{ebook}/download', [PublicController::class, 'downloadEbook']);
+    Route::get('/template/{template}/download', [PublicController::class, 'downloadTemplate']);
 });
 
 // Admin
@@ -48,6 +51,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::put('/kelas/{kela}/lessons/{lesson}', [Admin\CourseController::class, 'updateLesson']);
     Route::delete('/kelas/{kela}/lessons/{lesson}', [Admin\CourseController::class, 'destroyLesson']);
     Route::resource('/blog', Admin\PostController::class);
+    Route::resource('/template', Admin\TemplateController::class);
 
     Route::get('/order', [Admin\OrderController::class, 'index']);
     Route::post('/order/{order}/approve', [Admin\OrderController::class, 'approve']);

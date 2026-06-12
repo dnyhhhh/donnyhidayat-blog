@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Ebook;
 use App\Models\Course;
 use App\Models\Materi;
+use App\Models\Template;
 
 class DashboardController extends Controller
 {
@@ -16,19 +17,21 @@ class DashboardController extends Controller
         $hasBundle = $user->hasBundle();
 
         if ($hasBundle) {
-            $ebooks  = Ebook::where('is_published', true)->latest()->get();
-            $courses = Course::where('is_published', true)->latest()->get();
-            $materis = Materi::where('is_published', true)->latest()->get();
+            $ebooks    = Ebook::where('is_published', true)->latest()->get();
+            $courses   = Course::where('is_published', true)->latest()->get();
+            $materis   = Materi::where('is_published', true)->latest()->get();
+            $templates = Template::where('is_published', true)->latest()->get();
         } else {
-            $ebooks  = $user->orders()->where('orderable_type', 'ebook')->where('status', 'paid')->latest()->get();
-            $courses = $user->orders()->where('orderable_type', 'course')->where('status', 'paid')->latest()->get();
-            $materis = $user->orders()->where('orderable_type', 'materi')->where('status', 'paid')->latest()->get();
+            $ebooks    = $user->orders()->where('orderable_type', 'ebook')->where('status', 'paid')->latest()->get();
+            $courses   = $user->orders()->where('orderable_type', 'course')->where('status', 'paid')->latest()->get();
+            $materis   = $user->orders()->where('orderable_type', 'materi')->where('status', 'paid')->latest()->get();
+            $templates = $user->orders()->where('orderable_type', 'template')->where('status', 'paid')->latest()->get();
         }
 
         $bundleOrder = $user->orders()->where('orderable_type', 'bundle')->where('status', 'paid')->first();
         $allOrders   = $user->orders()->latest()->get();
 
-        return view('member.dashboard', compact('ebooks', 'courses', 'materis', 'hasBundle', 'bundleOrder', 'allOrders'));
+        return view('member.dashboard', compact('ebooks', 'courses', 'materis', 'templates', 'hasBundle', 'bundleOrder', 'allOrders'));
     }
 
     public function orderDetail(Order $order)

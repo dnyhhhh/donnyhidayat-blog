@@ -35,6 +35,7 @@
             ['ebook',   '📘', 'Ebook Saya',           $ebooks->count()],
             ['kelas',   '🎓', 'Kelas Saya',            $courses->count()],
             ['materi',  '✏️', 'Materi Interaktif',     $materis->count()],
+            ['template', '🖥️', 'Template',              $templates->count()],
             ['riwayat', '🧾', 'Riwayat',               $allOrders->count()],
         ] as [$key, $icon, $label, $count])
         <button @click="tab='{{ $key }}'; window.location.hash='{{ $key }}'"
@@ -175,6 +176,47 @@
     </div>
 
 
+    {{-- TAB: TEMPLATE --}}
+    <div x-show="tab==='template'" style="display:none;">
+        @if($templates->isEmpty())
+            <div class="empty-state">
+                <p style="font-size:40px;margin-bottom:12px;">🖥️</p>
+                <p style="font-weight:600;color:#374151;margin-bottom:6px;">Belum ada template</p>
+                <a href="/template" style="color:#1d4ed8;font-size:13px;">Lihat Template Website →</a>
+            </div>
+        @else
+            <div class="space-y-3">
+                @foreach($templates as $item)
+                <div class="order-card">
+                    <div style="display:flex;align-items:center;gap:14px;flex:1;min-width:0;">
+                        <div style="width:44px;height:44px;border-radius:10px;background:#f0f4ff;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🖥️</div>
+                        <div style="min-width:0;">
+                            <p style="font-weight:600;color:#111827;font-size:14px;">{{ $hasBundle ? $item->title : ($item->orderable->title ?? '—') }}</p>
+                            @if($hasBundle)
+                                <span style="font-size:11px;background:#e0e7ff;color:#3730a3;padding:2px 8px;border-radius:10px;font-weight:600;">🔥 via Paket Bundling</span>
+                            @else
+                                <p style="font-size:12px;color:#9ca3af;margin-top:2px;">{{ $item->invoice_number }} · {{ $item->created_at->format('d M Y') }}</p>
+                            @endif
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+                        @if($hasBundle)
+                            <a href="/member/template/{{ $item->id }}/download" class="btn-akses">Download</a>
+                        @else
+                            @include('member._status-badge', ['status' => $item->status])
+                            @if($item->status === 'paid')
+                                <a href="/member/template/{{ $item->orderable_id }}/download" class="btn-akses">Download</a>
+                            @else
+                                <a href="/member/order/{{ $item->id }}" class="btn-detail">Detail</a>
+                            @endif
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
+
     {{-- TAB: RIWAYAT --}}
     <div x-show="tab==='riwayat'" style="display:none;">
         @if($allOrders->isEmpty())
@@ -188,18 +230,12 @@
                 @foreach($allOrders as $order)
                 @php
                     $typeIcon = match($order->orderable_type) {
-                        'ebook'  => '📘',
-                        'course' => '🎓',
-                        'materi' => '✏️',
-                        'bundle' => '🔥',
-                        default  => '📄',
-                    };
-                    $typeLabel = match($order->orderable_type) {
-                        'ebook'  => 'Ebook',
-                        'course' => 'Kelas',
-                        'materi' => 'Materi Interaktif',
-                        'bundle' => 'Paket Bundling',
-                        default  => ucfirst($order->orderable_type),
+                        'ebook'    => '📘',
+                        'course'   => '🎓',
+                        'materi'   => '✏️',
+                        'bundle'   => '🔥',
+                        'template' => '🖥️',
+                        default    => '📄',
                     };
                     $productName = match($order->orderable_type) {
                         'bundle' => 'Paket Bundling — Akses Semua Konten',

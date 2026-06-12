@@ -63,7 +63,7 @@ class PublicController extends Controller
     public function checkout(Request $request)
     {
         $request->validate([
-            'type' => 'required|in:ebook,course,materi,bundle',
+            'type' => 'required|in:ebook,course,materi,bundle,template',
             'id'   => 'required|integer',
         ]);
 
@@ -86,7 +86,8 @@ class PublicController extends Controller
         $model = match($request->type) {
             'ebook'  => Ebook::findOrFail($request->id),
             'course' => Course::findOrFail($request->id),
-            'materi' => \App\Models\Materi::findOrFail($request->id),
+            'materi'    => \App\Models\Materi::findOrFail($request->id),
+            'template'  => \App\Models\Template::findOrFail($request->id),
         };
 
         if (auth()->user()->hasAccess($request->type, $model->id)) {
@@ -125,6 +126,25 @@ class PublicController extends Controller
         $ebookCount  = \App\Models\Ebook::where('is_published', true)->count();
         $courseCount = \App\Models\Course::where('is_published', true)->count();
         return view('public.bundling', compact('owned', 'ebookCount', 'courseCount'));
+    }
+
+    public function templateIndex()
+    {
+        $templates = \App\Models\Template::where('is_published', true)->latest()->paginate(9);
+        return view('public.template-index', compact('templates'));
+    }
+
+    public function templateShow(string $slug)
+    {
+        $template = \App\Models\Template::where('slug', $slug)->where('is_published', true)->firstOrFail();
+        $owned = auth()->check() && auth()->user()->hasAccess('template', $template->id);
+        return view('public.template-show', compact('template', 'owned'));
+    }
+
+    public function downloadTemplate(\App\Models\Template $template)
+    {
+        abort_unless(auth()->user()->hasAccess('template', $template->id), 403);
+        return Storage::disk('public')->download($template->file_path, $template->title . '.zip');
     }
 
     public function materiIndex()
