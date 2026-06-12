@@ -16,22 +16,38 @@ class RisetIdea extends Model
     {
         $score = 0;
 
-        if ($this->fakultas && str_contains(
-            strtolower($profile['fakultas'] ?? ''),
-            strtolower($this->fakultas)
-        )) $score += 3;
-
-        if ($this->konsentrasi && str_contains(
-            strtolower($profile['konsentrasi'] ?? ''),
-            strtolower($this->konsentrasi)
-        )) $score += 5;
-
-        if ($this->metode && strtolower($this->metode) === strtolower($profile['metode'] ?? '')) {
-            $score += 2;
+        // Cocokkan bidang (fakultas di DB = tag bidang ide)
+        if ($this->fakultas) {
+            $ideaBidang = strtolower($this->fakultas);
+            foreach ($profile['bidang'] ?? [] as $b) {
+                if (str_contains($ideaBidang, strtolower($b)) || str_contains(strtolower($b), $ideaBidang)) {
+                    $score += 3;
+                    break;
+                }
+            }
         }
 
-        // Idea tanpa filter cocok untuk semua
-        if (!$this->fakultas && !$this->konsentrasi) $score += 1;
+        // Cocokkan konsentrasi/prodi
+        if ($this->konsentrasi) {
+            $ideaKons = strtolower($this->konsentrasi);
+            if (str_contains(strtolower($profile['konsentrasi'] ?? ''), $ideaKons) ||
+                str_contains(strtolower($profile['prodi'] ?? ''), $ideaKons) ||
+                str_contains($ideaKons, strtolower($profile['prodi'] ?? ''))) {
+                $score += 5;
+            }
+        }
+
+        // Cocokkan metode
+        if ($this->metode && $profile['metode'] !== 'Belum tahu') {
+            if (strtolower($this->metode) === strtolower($profile['metode'] ?? '')) {
+                $score += 2;
+            }
+        }
+
+        // Ide universal (tanpa filter spesifik)
+        if (!$this->fakultas && !$this->konsentrasi) {
+            $score += 1;
+        }
 
         return $score;
     }
