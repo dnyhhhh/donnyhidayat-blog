@@ -67,6 +67,11 @@
                         class="inline-block mt-3 bg-green-600 text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-green-700">
                         Download Ebook
                     </a>
+                @elseif($order->orderable_type === 'materi')
+                    <a href="/materi/modul/1"
+                        class="inline-block mt-3 bg-green-600 text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-green-700">
+                        Akses Materi Interaktif
+                    </a>
                 @else
                     <a href="/kelas"
                         class="inline-block mt-3 bg-green-600 text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-green-700">
