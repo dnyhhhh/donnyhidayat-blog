@@ -14,6 +14,7 @@ Route::get('/kelas', [PublicController::class, 'courseIndex']);
 Route::get('/kelas/{slug}', [PublicController::class, 'courseShow']);
 Route::get('/materi', [PublicController::class, 'materiIndex']);
 Route::get('/materi/modul/{modul}', [PublicController::class, 'materiModul'])->middleware('auth');
+Route::get('/materi/{slug}', [PublicController::class, 'materiDetail'])->where('slug', '[a-z0-9\-]+');
 Route::get('/tentang', [PublicController::class, 'tentang']);
 Route::get('/blog', [PublicController::class, 'blogIndex']);
 Route::get('/blog/{slug}', [PublicController::class, 'blogShow']);

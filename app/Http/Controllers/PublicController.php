@@ -101,9 +101,14 @@ class PublicController extends Controller
 
     public function materiIndex()
     {
+        return view('public.materi-index');
+    }
+
+    public function materiDetail(string $slug)
+    {
         $materi = \App\Models\Materi::findOrFail(1);
         $owned  = auth()->check() && auth()->user()->hasAccess('materi', 1);
-        return view('public.materi-index', compact('materi', 'owned'));
+        return view('public.materi-detail', compact('materi', 'owned'));
     }
 
     public function materiModul(int $modul)
