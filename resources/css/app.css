@@ -1,9 +1,30 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
+@source "../views/**/*.blade.php";
+@source "../../app/**/*.php";
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-primary: #1d4ed8;
+    --color-primary-dark: #1e40af;
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+/*
+  Safelist: class yang dipakai secara dinamis (Alpine x-show, x-bind:class, dll)
+  sehingga Tailwind v4 tidak membuangnya saat build.
+*/
+@layer utilities {
+    .bg-green-500 { background-color: #22c55e; }
+    .bg-green-100 { background-color: #dcfce7; }
+    .text-green-700 { color: #15803d; }
+    .text-green-600 { color: #16a34a; }
+    .bg-blue-50 { background-color: #eff6ff; }
+    .bg-blue-700 { background-color: #1d4ed8; }
+    .bg-blue-800 { background-color: #1e40af; }
+    .border-blue-700 { border-color: #1d4ed8; }
+    .border-l-4 { border-left-width: 4px; }
+    .border-transparent { border-color: transparent; }
+    .line-through { text-decoration-line: line-through; }
+    .text-gray-400 { color: #9ca3af; }
+    .text-gray-500 { color: #6b7280; }
 }
